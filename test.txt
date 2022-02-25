@@ -1,0 +1,38 @@
+
+db.lists.find({name: 'tokyo'} , function(err, docs) {
+  console.log(docs);
+})
+
+
+List.find({name: customTitle}, function(err, foundList) {
+  if (!err) {
+    if (!foundList) {
+      const listItem = new List ({
+        name: customTitle,
+        items: defaultItems
+      })
+      listItem.save();
+    } else {
+      name10 = foundList[0].name;
+      list10 = foundList[0].items;
+      //console.log(foundList);
+
+      res.render('list' , {message10: name10, stuffToDo: list10});
+    }
+
+  } else {
+    console.log(err);
+  }
+})
+
+
+
+
+db.product.find({_id : a} , function (err, deleteList) {
+   if (!err) {
+    var listName = deleteList.name;
+   }
+})
+
+db.product.deleteOne({_id:a})
+res.redirect("/" + listName)

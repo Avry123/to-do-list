@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital@1&family=Rowdies:wght@300&display=swap" rel="stylesheet">
+  </head>
+  <style>
+  body {
+    width:100vw;
+    height: 100vh;
+    background-image: linear-gradient(
+    45deg,
+    blue,
+    #FEF9EF,
+    #FF865E,
+    red
+    );
+ background-size: 300%;
+ animation: neel 20s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes neel {
+
+  0% {background-position: right;}
+  100% {background-positon: left;}
+}
+
+  div {
+    width: 350px;
+    height: auto;
+    text-align: center;
+    border-radius: 20px;
+    background: #E900FF;
+  }
+
+  ul {
+    margin: 0px;
+    padding:0px;
+    list-style: none;
+  }
+
+  li {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  input[type='text']  {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .check10:checked ~ p {
+    text-decoration: line-through;
+  }
+
+  p {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  h1 {
+    font-family: 'Arimo', sans-serif;
+    font-weight: normal;
+    color: #90E0EF;
+  }
+  </style>
+  <body>
+    <h1><%= message10 %></h1>
+    <div>
+    <ul>
+      <form action="/delete" method="post">
+      <% stuffToDo.forEach(function(a) { %>
+         <li><input onchange="this.form.submit()" name='checkbox' type='checkbox' value="<%= a._id %>"> <p><%= a.name %></p>  </li>
+      <% }) %>
+       </ul>
+       <input type='hidden' name='listName' value="<%= message10 %>"></input>
+     </form>
+    <form class="" action="/" method="post">
+      Stuff to do:<input type='text' name='stuff'>
+      <button name="list" value=<%= message10 %>>Submit</button>
+    </form>
+    </div>
+  </body>
+  <script>
+    document.querySelectorAll('li').addEventListener('click' , function () {
+      document.querySelectorAll('li').style.textDecoration = "line-through";
+    })
+  </script>
+</html>
