@@ -123,10 +123,9 @@ if (listTitle === 'Today') {
 
 
 app.post("/delete" , function(req,res) {
-  var d = req.body.checkbox;
+  var checkedItem = req.body.checkbox;
   var listName10 = req.body.listName;
-
-  if (listName10 === 'Today') {
+if (listName10 === 'Today') {
     Item.findByIdAndRemove(d, function(err) {
       if (!err) {
         console.log("successfully deleted checked item");
@@ -134,12 +133,14 @@ app.post("/delete" , function(req,res) {
       }
     })
   } else {
-    List.findOneAndUpdate({named: listName10}, {$pull : {items: {_id : d}}}, function(err, foundList) {
+    List.updateOne({name: listName10}, {$pull : {items: {_id : checkedItem}}}, function(err, foundList) {
       if (!err) {
         res.redirect("/" + listName10);
       }
     })
   }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Item.deleteOne({_id : d} , function(err) {
     //if (err) {
       //console.log(err);
